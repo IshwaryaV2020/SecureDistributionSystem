@@ -18,3 +18,6 @@ __pycache__/
 # IDE and system files
 .vscode/
 .DS_Store
+
+# Local SQLite database and private application files
+instance/
