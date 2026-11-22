@@ -29,6 +29,24 @@ def create_retail_db():
             )
         """)
 
+        retail_cursor.execute("""
+            CREATE TABLE IF NOT EXISTS retail_users (
+                userid INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL UNIQUE,
+                user_pwd_hash TEXT NOT NULL,
+                userrole TEXT NOT NULL CHECK (
+                    userrole IN (
+                        'admin',
+                        'inventory_manager',
+                        'employee'
+                    )
+                ),
+                user_created_at TEXT NOT NULL
+                    DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+
     print("Retail inventory database initialized successfully.")
 
 if __name__ == "__main__":
