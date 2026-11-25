@@ -4,23 +4,23 @@
 A secure web application developed using Python and Flask
 to manage products and distribution activities.
 
-This project focuses on secure web application development,
+This project focuses on secure web application development
 including authentication, authorization, input validation,
 and database security.
 
 ## Technologies
 - Python
 - Flask
-- HTML/CSS (planned)
-- SQLite (planned)
+- HTML/CSS 
+- SQLite 
 - Git and GitHub
 
 ## Features
-- Basic Flask application (implemented)
-- User authentication (planned)
-- Role-based access control (planned)
-- Product CRUD operations (planned)
-- Secure database integration (planned)
+- Basic Flask application 
+- User authentication
+- Role-based access control
+- Product CRUD operations
+- Secure database integration
 
 ## Security Objectives
 - Prevent SQL injection
