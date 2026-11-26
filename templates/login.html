@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Retail Login</title>
+</head>
+<body>
+
+    <h1>Secure Product Distribution System</h1>
+    <h2>User Login</h2>
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+    <form method="POST" action="/login">
+
+        <input type="hidden" name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <label>Username:</label>
+        <input type="text" name="username" required>
+
+        <br><br>
+
+        <label>Password:</label>
+        <input type="password" name="user_pwd" required>
+
+        <br><br>
+
+        <button type="submit">Login</button>
+
+    </form>
+{% if session.get("userid") %}
+
+    <p>Welcome, {{ session["username"] }}</p>
+    <p>Role: {{ session["userrole"] }}</p>
+
+    <form method="POST" action="{{ url_for('logout') }}">
+        <input type="hidden" name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <button type="submit">Logout</button>
+    </form>
+
+{% endif %}
+</body>
+</html>

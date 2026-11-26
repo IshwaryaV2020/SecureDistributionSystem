@@ -19,6 +19,19 @@
         <li>Secure User Authentication</li>
     </ul>
 
-    <p>Features will be implemented during development.</p>
+    <p>additional features will be implemented in later stages.</p>
+    {% if session.get("userid") %}
+
+    <p>Welcome, {{ session["username"] }}</p>
+    <p>Role: {{ session["userrole"] }}</p>
+
+    <form method="POST" action="{{ url_for('logout') }}">
+        <input type="hidden" name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <button type="submit">Logout</button>
+    </form>
+
+{% endif %}
 </body>
 </html>
