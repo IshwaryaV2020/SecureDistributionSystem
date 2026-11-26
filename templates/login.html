@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Retail Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='retail_style.css') }}">
 </head>
 <body>
-
-    <h1>Secure Product Distribution System</h1>
+<div class="login_box">
+    <h1>Product Distribution System</h1>
     <h2>User Login</h2>
 {% if error %}
-    <p style="color: red;">{{ error }}</p>
+    <p class="error_msg">{{ error }}</p>
 {% endif %}
     <form method="POST" action="/login">
 
@@ -29,18 +30,6 @@
         <button type="submit">Login</button>
 
     </form>
-{% if session.get("userid") %}
-
-    <p>Welcome, {{ session["username"] }}</p>
-    <p>Role: {{ session["userrole"] }}</p>
-
-    <form method="POST" action="{{ url_for('logout') }}">
-        <input type="hidden" name="csrf_token"
-               value="{{ csrf_token() }}">
-
-        <button type="submit">Logout</button>
-    </form>
-
-{% endif %}
+</div>
 </body>
 </html>

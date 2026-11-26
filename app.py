@@ -7,7 +7,7 @@ import sqlite3
 from pathlib import Path
 from retail_security import verify_user_pwd
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="style")
 app.config["SECRET_KEY"] = os.environ["RETAIL_SECRET_KEY"]
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
