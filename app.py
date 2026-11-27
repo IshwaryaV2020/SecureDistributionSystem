@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import sqlite3
 from pathlib import Path
 from retail_security import verify_user_pwd
+from retail_products import view_products
 
 app = Flask(__name__, static_folder="style")
 app.config["SECRET_KEY"] = os.environ["RETAIL_SECRET_KEY"]
@@ -66,6 +67,14 @@ def logout():
 @retail_role_required("admin")
 def security_monitoring():
     return "Security Monitoring (Admin Access Only)"
-    
+
+
+@app.route("/products")
+@retail_role_required("admin", "inventory_manager", "employee")
+def products():
+    retail_items = view_products()
+    return render_template("products.html", retail_items=retail_items)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

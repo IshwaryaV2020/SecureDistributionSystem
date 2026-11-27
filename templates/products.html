@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Retail Inventory</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='retail_style.css') }}">
+</head>
+<body>
+
+    <h1>Retail Product Inventory</h1>
+
+    <a href="{{ url_for('home') }}">Back to Homepage</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price (€)</th>
+                <th>Quantity</th>
+                <th>Description</th>
+                <th>SKU</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in retail_items %}
+            <tr>
+                <td>{{ item["p_id"] }}</td>
+                <td>{{ item["p_name"] }}</td>
+                <td>{{ item["p_category"] }}</td>
+                <td>{{ "%.2f"|format(item["p_price"] / 100) }}</td>
+                <td>{{ item["p_quantity"] }}</td>
+                <td>{{ item["p_desc"] }}</td>
+                <td>{{ item["p_sku"] }}</td>
+                <td>{{ item["p_creationdate"] }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="8">No products available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
