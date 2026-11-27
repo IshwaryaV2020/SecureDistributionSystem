@@ -6,7 +6,8 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import sqlite3
 from pathlib import Path
 from retail_security import verify_user_pwd
-from retail_products import view_products
+from retail_products import view_products, add_product, retail_categories
+
 
 app = Flask(__name__, static_folder="style")
 app.config["SECRET_KEY"] = os.environ["RETAIL_SECRET_KEY"]
@@ -75,6 +76,34 @@ def products():
     retail_items = view_products()
     return render_template("products.html", retail_items=retail_items)
 
+@app.route("/products/add", methods=["GET", "POST"])
+@retail_role_required("admin", "inventory_manager")
+def product_add():
+
+    if request.method == "POST":
+
+        validation_error = add_product(
+            request.form.get("p_name", ""),
+            request.form.get("p_category", ""),
+            request.form.get("p_price", ""),
+            request.form.get("p_quantity", ""),
+            request.form.get("p_desc", ""),
+            request.form.get("p_sku", "")
+        )
+
+        if validation_error:
+            return render_template(
+                "add_product.html",
+                error=validation_error,
+                retail_categories=retail_categories
+            ), 400
+
+        return redirect(url_for("products"))
+
+    return render_template(
+        "add_product.html",
+        retail_categories=retail_categories
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
